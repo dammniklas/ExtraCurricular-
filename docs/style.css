@@ -1,0 +1,127 @@
+ 
+    :root{
+      --bg:#0a0711;              /* tiefes Schwarz-Lila */
+      --bg2:#120a1f;             /* dunkler Verlauf */
+      --purple:#8b5cf6;          /* primär lila */
+      --purple-neon:#b388ff;     /* neon glow */
+      --text:#eae6ff;
+      --muted:#bdb8d9;
+      --card:#151026cc;          /* glas/karte */
+      --border:#2a2142;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.45);
+      --glow:0 0 24px rgba(179,136,255,.45), 0 0 48px rgba(139,92,246,.25);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 15% -10%, rgba(139,92,246,.25), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(179,136,255,.2), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      background-attachment: fixed;
+    }
+
+    /* Top-Navigation */
+    .nav-wrap{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(10,7,17,.55);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav{
+      max-width: 1200px; margin: 0 auto; padding: 14px 20px;
+      display:flex; align-items:center; gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px; margin-right:auto;
+      font-family: Orbitron, sans-serif; letter-spacing:.5px; font-weight:700;
+    }
+    .brand .dot{
+      width:14px; height:14px; border-radius:50%;
+      background: radial-gradient(circle at 40% 40%, var(--purple-neon), var(--purple) 60%, #5b2bd4 100%);
+      box-shadow: var(--glow);
+    }
+    .nav a{
+      color:var(--text); text-decoration:none; font-weight:600;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid transparent;
+      transition: .2s ease;
+    }
+    .nav a:hover{
+      background: rgba(139,92,246,.12);
+      border-color: rgba(139,92,246,.35);
+      box-shadow: var(--glow);
+    }
+    .nav a.active{
+      background: linear-gradient(135deg, rgba(139,92,246,.35), rgba(179,136,255,.25));
+      border-color: rgba(139,92,246,.55);
+      box-shadow: var(--glow);
+    }
+
+    /* Hero / Titel */
+    .hero{
+      max-width: 1200px; margin: 56px auto 24px; padding: 0 20px;
+    }
+    .title{
+      font-family: Orbitron, sans-serif;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 1.05; margin: 0 0 14px;
+      text-shadow: 0 2px 20px rgba(139,92,246,.3);
+      letter-spacing: .6px;
+    }
+    .subtitle{
+      color: var(--muted);
+      font-size: clamp(16px, 2.2vw, 18px);
+      max-width: 60ch;
+    }
+
+    /* Textblock (Karte) */
+    .card{
+      max-width: 1000px; margin: 26px auto 80px; padding: 0 20px;
+    }
+    .card-inner{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-inner::before{
+      content:""; position:absolute; inset:-2px;
+      border-radius: calc(var(--radius) + 2px);
+      background: conic-gradient(from 180deg at 50% 50%, rgba(139,92,246,.18), transparent 30%, rgba(139,92,246,.12), transparent 70%);
+      filter: blur(18px); opacity:.6; pointer-events:none;
+    }
+    .prose{
+      position: relative;
+      color: var(--text);
+      font-size: 1.075rem; line-height: 1.7;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius: 999px;
+      background: rgba(139,92,246,.12);
+      border:1px solid rgba(139,92,246,.35);
+      font-size: .82rem; letter-spacing:.3px; font-weight:600;
+      box-shadow: var(--glow);
+    }
+
+    /* Footer (optional) */
+    footer{
+      max-width:1200px; margin:60px auto 40px; padding:0 20px;
+      color: #9a94b8; font-size:.9rem;
+    }
+
+    /* Responsiv */
+    @media (max-width: 640px){
+      .nav{ gap:8px; }
+      .nav a{ padding:8px 12px; font-weight:600; }
+    }
+  

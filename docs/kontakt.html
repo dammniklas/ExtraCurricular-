@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExtraCurricular – Kontakt</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav-wrap" role="banner">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <div class="brand"><span class="dot"></span> ExtraCurricular</div>
+      <a href="index.html">Startseite</a>
+      <a href="uebersicht.html">Übersicht</a>
+      <a class="active" href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main>
+    <section class="hero">
+      <h1 class="title">Kontakt</h1>
+      <p class="subtitle">
+        Nimm Kontakt mit uns auf – wir freuen uns über Fragen, Anregungen oder neue Ideen.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="card-inner">
+        <span class="pill">Schreib uns</span>
+        <div class="prose" style="margin-top:14px;">
+          <p>Du erreichst uns über folgende Wege:</p>
+          <ul>
+            <li>E-Mail: <a href="mailto:info@extracurricular.de">info@extracurricular.de</a></li>
+            <li>Telefon: +49 (0)123 456789</li>
+            <li>Adresse: Musterstraße 12, 12345 Beispielstadt</li>
+          </ul>
+          <p>Oder nutze einfach das folgende Formular:</p>
+
+          <form action="#" method="post">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">E-Mail:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="nachricht">Nachricht:</label><br>
+            <textarea id="nachricht" name="nachricht" rows="5" required></textarea><br><br>
+
+            <button type="submit" class="btn">Senden</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="y"></span> ExtraCurricular. Alle Rechte vorbehalten.
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
