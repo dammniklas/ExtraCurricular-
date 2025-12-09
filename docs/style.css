@@ -3,7 +3,7 @@
       --bg:#0a0711;              /* tiefes Schwarz-Lila */
       --bg2:#120a1f;             /* dunkler Verlauf */
       --purple:#8b5cf6;          /* primär lila */
-      --purple-neon:#b388ff;     /* neon glow */
+      --purple-neon:#000000;     /* neon glow */
       --text:#eae6ff;
       --muted:#bdb8d9;
       --card:#151026cc;          /* glas/karte */
@@ -69,8 +69,8 @@
     }
     .title{
       font-family: Orbitron, sans-serif;
-      font-size: clamp(44px, 6vw, 72px);
-      line-height: 1.05; margin: 0 0 14px;
+      font-size: clamp(90px, 6vw, 72px);
+      line-height: 1.05; margin: 0 0 70px;
       text-shadow: 0 2px 20px rgba(139,92,246,.3);
       letter-spacing: .6px;
     }
@@ -102,14 +102,14 @@
     .prose{
       position: relative;
       color: var(--text);
-      font-size: 1.075rem; line-height: 1.7;
+      font-size: 1.2rem; line-height: 1.7;
     }
     .pill{
       display:inline-flex; align-items:center; gap:8px;
       padding:8px 12px; border-radius: 999px;
       background: rgba(139,92,246,.12);
       border:1px solid rgba(139,92,246,.35);
-      font-size: .82rem; letter-spacing:.3px; font-weight:600;
+      font-size: 1.0rem; letter-spacing:.3px; font-weight: 700;
       box-shadow: var(--glow);
     }
 
