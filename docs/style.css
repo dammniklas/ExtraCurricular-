@@ -512,3 +512,85 @@ header.nav-wrap .nav .nav-links {
 
 
 
+/* ===== Textkarten (nur Startseite & Kontakt) schmal + ohne äußere Box ===== */
+.text-card {
+  /* äußere Hülle neutralisieren */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+
+  /* zentrieren */
+  display: flex;
+  justify-content: center;
+}
+
+.text-card .card-inner {
+  /* echte sichtbare Karte */
+  width: clamp(280px, 80%, 900px);
+  margin: 0 auto;
+  /* card-inner behält schon dein futuristisches Styling (bg, border, radius, shadow) */
+}
+
+/* Mobil etwas breiter */
+@media (max-width: 768px) {
+  .text-card .card-inner { width: 90%; }
+}
+@media (max-width: 480px) {
+  .text-card .card-inner { width: 95%; }
+}
+
+/* ===== Grid-Karten (Übersicht) bleiben wie gehabt ===== */
+.grid .card { 
+  /* nur Übersichtskarten bekommen Mindesthöhe etc. */
+  min-height: 320px;
+}
+
+/* ===== Footer fixiert am unteren Rand ===== */
+/*html, body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Seitenlayout & Footer ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hauptinhalt ganz normal von oben beginnend */
+body > main {
+  flex: 1;
+  display: block; /* entfernt zentrierendes Flex */
+}
+
+/* Footer bündig unten, über ganze Breite */
+
+
+/* Footer bündig, ohne rechte Lücke */
+html, body { overflow-x: hidden; } /* killt seitlichen Überlauf durch Glows */
+
+footer{
+  position: fixed;
+  left: 0;
+  right: 0;      /* statt width:100% -> verhindert Pixelfehler am rechten Rand */
+  bottom: 0;
+  margin: 0;
+  padding: 14px 0;
+  text-align: center;
+  color: #9a94b8;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+  background: rgba(10, 7, 17, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 99;
+  box-shadow: 0 -1px 12px rgba(139, 92, 246, 0.25);
+  /* kein width setzen! left+right regeln die volle Breite */
+}
+
+/* damit der Fix-Footer nichts überdeckt */
+body > main { padding-bottom: 64px; }
