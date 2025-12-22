@@ -12,6 +12,10 @@
 <body>
 
   <!-- Navigation -->
+  <!--
+  
+  
+  
   <header class="nav-wrap" role="banner">
     <nav class="nav" aria-label="Hauptnavigation">
       <p><strong>By Niklas K. Damm & Antonio L. Martinez</strong></p>
@@ -21,6 +25,28 @@
       <a href="kontakt.html">Kontakt</a>
     </nav>
   </header>
+  
+  
+  
+  -->
+
+<header class="nav-wrap">
+  <nav class="nav">
+    <div class="authors">By Niklas K. Damm & Antonio L. Martinez</div>
+
+    <div class="brand"><span class="dot"></span> ExtraCurricular</div>
+
+    <button class="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Startseite</a>
+      <a href="uebersicht.html">Übersicht</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </nav>
+</header>
 
   <!-- Hero -->
   <main>
@@ -60,6 +86,19 @@
   <footer>
     @ExtraCurricular 2025. Alle Rechte vorbehalten. <a href="impressum.html">Impressum</a> 
   </footer>
+
+  
+<script>
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+</script>
 
 </body>
 

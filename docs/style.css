@@ -978,3 +978,64 @@ a:hover {
   }
 }
 
+/* ===== Mobile: Nav zentriert + einklappbar ===== */
+header.nav-wrap .burger { display: none; } /* Desktop: aus */
+
+@media (max-width: 768px) {
+  header.nav-wrap .nav{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  header.nav-wrap .authors{
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+
+  header.nav-wrap .brand{
+    position: static !important;   /* wichtig: keine absolute Mitte auf Mobile */
+    transform: none !important;
+    pointer-events: auto;
+    text-align: center;
+  }
+
+  /* Burger sichtbar */
+  header.nav-wrap .burger{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: 0;
+    padding: 8px;
+    cursor: pointer;
+  }
+  header.nav-wrap .burger span{
+    width: 28px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--text);
+  }
+
+  /* Links standardmäßig eingeklappt */
+  header.nav-wrap .nav-links{
+    display: none;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* aufgeklappt */
+  header.nav-wrap .nav-links.open{
+    display: flex;
+  }
+
+  header.nav-wrap .nav-links a{
+    padding: 10px 16px;
+  }
+}
+
