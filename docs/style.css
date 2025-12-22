@@ -3,8 +3,8 @@
 :root {
   --bg: #0a0711;
   --bg2: #120a1f;
-  --purple: #8b5cf6;
-  --purple-neon: #b388ff;
+  --purple: #5328b9;
+  --purple-neon: #441fe9;
   --text: #eae6ff;
   --muted: #bdb8d9;
   --card: #151026cc;
@@ -554,44 +554,385 @@ header.nav-wrap .nav .nav-links {
 }
 
 /* ===== Seitenlayout & Footer ===== */
+/* ===== Sticky-Footer: immer am Ende, nicht mitlaufen ===== */
+/* ===== Footer bleibt am unteren Rand der Seite, passt sich Bildschirmbreite an ===== */
+
+/* Grundlayout */
 html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
+  overflow-x: hidden;           /* verhindert rechte Lücken bei Glows */
+}
+
+body {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;            /* gesamte Bildschirmhöhe */
 }
 
-/* Hauptinhalt ganz normal von oben beginnend */
+/* Hauptinhalt füllt restlichen Platz aus */
 body > main {
   flex: 1;
-  display: block; /* entfernt zentrierendes Flex */
 }
 
-/* Footer bündig unten, über ganze Breite */
-
-
-/* Footer bündig, ohne rechte Lücke */
-html, body { overflow-x: hidden; } /* killt seitlichen Überlauf durch Glows */
-
-footer{
-  position: fixed;
-  left: 0;
-  right: 0;      /* statt width:100% -> verhindert Pixelfehler am rechten Rand */
-  bottom: 0;
+/* Footer */
+footer {
+  flex-shrink: 0;               /* verhindert Zusammendrücken */
   margin: 0;
   padding: 14px 0;
   text-align: center;
+  width: 100%;                  /* nimmt IMMER volle Breite des Bildschirms ein */
+  box-sizing: border-box;       /* Padding zählt zur Gesamtbreite */
   color: #9a94b8;
   font-size: 0.9rem;
   border-top: 1px solid rgba(139, 92, 246, 0.15);
-  background: rgba(10, 7, 17, 0.85);
+  background: rgba(10, 7, 17, 0.4);
   backdrop-filter: blur(6px);
-  z-index: 99;
   box-shadow: 0 -1px 12px rgba(139, 92, 246, 0.25);
-  /* kein width setzen! left+right regeln die volle Breite */
 }
 
-/* damit der Fix-Footer nichts überdeckt */
-body > main { padding-bottom: 64px; }
+/* ===== Footer: volle Bildschirmbreite, bündig unten ===== */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* verhindert rechte Lücken durch Glows */
+}
 
+body > main { flex: 1 0 auto; }
+
+/* Alte Footer-Styles neutralisieren und Full-Bleed erzwingen */
+body > footer {
+  position: static !important;     /* nicht fixed */
+  max-width: none !important;
+  width: 100vw !important;         /* volle Viewport-Breite */
+  margin: 0 calc(50% - 50vw) !important; /* Full-bleed, selbst wenn Vorfahren zentrieren */
+  padding: 14px 0 !important;
+  box-sizing: border-box;
+  text-align: center !important;
+  color: #9a94b8;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(139, 92, 246, 0.15);
+  background: rgba(10, 7, 17, 0.4);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 -1px 12px rgba(139, 92, 246, 0.25);
+  flex-shrink: 0;
+}
+
+/* ===== Nur die Kontaktinfos (E-Mail, Telefon, Adresse) linksbündig ===== */
+
+/* Container für die Kontaktinfos */
+.card.text-card .contact-info {
+  text-align: left !important;
+  padding-left: 40px;       /* Einrückung für harmonischen Look */
+  margin: 10px 0 20px 0;
+}
+
+/* Liste optisch sauber ausrichten */
+.card.text-card .contact-info ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.card.text-card .contact-info li {
+  margin: 0.25rem 0;
+}
+
+/* Alle anderen Texte (Formular, Titel etc.) bleiben mittig */
+.card.text-card form,
+.card.text-card form label,
+.card.text-card .pill,
+.card.text-card h1,
+.card.text-card h2 {
+  text-align: center !important;
+}
+
+
+/* ===== Navigationsleiste Feintuning ===== */
+
+/* 1. Zentriert den "ExtraCurricular"-Titel fix in der Mitte */
+nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Titel bleibt mittig */
+  gap: 0; /* kein unnötiger Abstand */
+}
+
+/* Titel (ExtraCurricular) bleibt fix in der Mitte */
+nav .brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  color: #e4dcff;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* 2. Buttons enger zusammenrücken */
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* vorher vermutlich 25px oder mehr */
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: Buttons etwas kompakter */
+nav ul li a {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.25);
+  color: #e4dcff;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  background: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.7);
+  transform: translateY(-1px);
+}
+
+/* 3. Links platzierter Autor-Text bleibt unverändert */
+nav .authors {
+  position: absolute;
+  left: 20px;
+  font-size: 0.9rem;
+  color: #d1c7ff;
+}
+
+
+/* ===== Navigation richtig ausrichten ===== */
+nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Autoren links, Buttons rechts */
+  padding: 10px 40px;
+}
+
+/* Autorenlink links */
+nav .authors {
+  position: relative;
+  left: 0;
+  font-size: 0.9rem;
+  color: #d1c7ff;
+}
+
+/* Titel fix in der Mitte */
+nav .brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  color: #e4dcff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  pointer-events: none; /* bleibt fix, kein Klick */
+}
+
+/* Navigation rechts */
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Buttons näher zusammen */
+  margin: 0;
+  padding: 0;
+}
+
+/* Buttons selbst */
+nav ul li a {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.25);
+  color: #e4dcff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+nav ul li a:hover {
+  background: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+  transform: translateY(-1px);
+}
+
+
+/* ===== NAV: Titel fix in der Mitte, Buttons ganz rechts, kleiner Abstand ===== */
+
+/* Basis-Layout der Leiste */
+header.nav-wrap .nav{
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Titel mittig „fixiert“ */
+header.nav-wrap .nav .brand{
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  pointer-events: none; /* bleibt mittig, kein Klick-Versatz */
+}
+
+/* VARIANTE A: Buttons in Container .nav-links → nach rechts + enger */
+header.nav-wrap .nav .nav-links{
+  margin-left: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;          /* enger zusammen */
+}
+
+/* VARIANTE B: Links sind direkte Kinder von .nav (ohne .nav-links) */
+header.nav-wrap .nav > a:not(.brand):first-of-type{
+  margin-left: auto !important;  /* schiebt den ersten Button nach rechts */
+}
+header.nav-wrap .nav > a:not(.brand){
+  margin-left: 8px !important;   /* enger Abstand zwischen Buttons */
+}
+
+/* Optional: etwas kompaktere Pillen */
+header.nav-wrap .nav .nav-links a,
+header.nav-wrap .nav > a:not(.brand){
+  padding: 8px 14px !important;
+}
+
+
+/* ===== Etwas mehr Abstand zwischen den Navigationsbuttons ===== */
+header.nav-wrap .nav .nav-links {
+  gap: 18px !important; /* vorher 8px – jetzt leicht vergrößert */
+}
+
+header.nav-wrap .nav > a:not(.brand) {
+  margin-left: 18px !important; /* für direkte Links ohne .nav-links */
+}
+
+/* ===== Standard-Link-Design neutralisieren ===== */
+a {
+  color: #5b2bd4;              /* übernimmt die Textfarbe der Umgebung */
+  text-decoration: none;       /* entfernt die Unterstreichung */
+}
+
+/* ===== Optional: Hover-Effekt für Stil-Konsistenz ===== */
+a:hover {
+  text-decoration: underline;  /* oder 'none', wenn du gar keinen Effekt willst */
+  color: var(--purple);        /* oder eine dezente Akzentfarbe */
+}
+
+/* ===== Kontaktkarte Feintuning ===== */
+
+/* 1. "Schreib uns" mittig ausrichten */
+.card.text-card .pill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 12px auto; /* zentriert + etwas Abstand nach unten */
+  text-align: center;
+}
+
+/* 2. Mehr Abstand der Kontaktkarte zum Footer */
+.card.text-card {
+  margin-bottom: 120px !important; /* etwas Luft nach unten */
+}
+
+/* (Optional) Wenn du willst, dass der Abstand auf Mobil kleiner ist: */
+@media (max-width: 600px) {
+  .card.text-card {
+    margin-bottom: 80px !important;
+  }
+}
+
+/* ===== Kontaktkarte: perfekte Zentrierung & Balance ===== */
+
+/* Grundausrichtung des Kartenelements */
+.card.text-card .card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* alles mittig horizontal */
+  text-align: center;   /* Standard: zentrierter Text */
+  padding: 40px 20px;
+}
+
+/* Pill (Schreib uns) exakt mittig */
+.card.text-card .pill {
+  margin: 0 auto 14px auto;
+  text-align: center;
+}
+
+/* "So erreichst du uns ..." mittig */
+.card.text-card p {
+  text-align: center;
+  width: 100%;
+}
+
+/* Kontakt-Infos (E-Mail, Telefon, Adresse) linksbündig */
+.card.text-card .contact-info {
+  text-align: left !important;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px auto 20px auto;
+  padding-left: 40px;
+}
+
+/* Formular mittig platzieren */
+.card.text-card form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Labels mittig über Feldern */
+.card.text-card form label {
+  text-align: center;
+  width: 100%;
+  font-weight: 600;
+  margin: 8px 0 4px 0;
+}
+
+/* Eingabefelder mittig + gleich breit */
+.card.text-card form input,
+.card.text-card form textarea {
+  display: block;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto 12px auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  padding: 10px 14px;
+}
+
+/* Senden-Button mittig */
+.card.text-card form button {
+  display: block;
+  margin: 16px auto 0 auto;
+  border-radius: 999px;
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Button Hover */
+.card.text-card form button:hover {
+  background: var(--purple-neon);
+  box-shadow: 0 0 15px rgba(179, 136, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Mehr Abstand zum Footer */
+.card.text-card {
+  margin-bottom: 120px !important;
+}
