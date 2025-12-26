@@ -1039,3 +1039,62 @@ header.nav-wrap .burger { display: none; } /* Desktop: aus */
   }
 }
 
+
+
+
+
+
+
+/* ===== Glühbirne oben links ===== */
+.bulb-wrap{
+  position: fixed;
+  top: 70px;        /* ggf. an deine Nav anpassen */
+  left: 18px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.bulb{
+  width: 80px;
+  height: 80px;
+  transform: rotate(-10deg);
+  filter: drop-shadow(0 0 18px rgba(179,136,255,.35));
+}
+
+/* Licht, das mit der Website verschmilzt */
+.bulb-light{
+  position: absolute;
+  top: 14px;
+  left: 40px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle at 0% 0%,
+    rgba(179,136,255,.45) 0%,
+    rgba(139,92,246,.25) 40%,
+    rgba(139,92,246,0) 70%);
+  mix-blend-mode: screen;
+  opacity: .75;
+}
+
+/* Sanftes Pulsieren */
+@media (prefers-reduced-motion: no-preference){
+  .bulb-wrap{
+    animation: bulbPulse 3s ease-in-out infinite;
+  }
+  @keyframes bulbPulse{
+    0%,100% { filter: drop-shadow(0 0 16px rgba(179,136,255,.3)); }
+    50% { filter: drop-shadow(0 0 28px rgba(179,136,255,.55)); }
+  }
+}
+
+/* Mobile kleiner */
+@media (max-width: 768px){
+  .bulb-wrap{ top: 90px; left: 10px; }
+  .bulb{ width: 56px; height: 56px; }
+  .bulb-light{ width: 160px; height: 160px; }
+}
+
+
+
+
+
