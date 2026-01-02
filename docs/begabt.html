@@ -112,7 +112,46 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+  <script>
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("header.nav-wrap .nav");
+  const burger = nav?.querySelector(".burger");
+  const navLinks = nav?.querySelector(".nav-links");
+  if (!nav || !burger || !navLinks) return;
 
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  function sync() {
+    if (mq.matches) {
+      // Mobile: standard zu
+      navLinks.hidden = !nav.classList.contains("menu-open");
+      burger.setAttribute("aria-expanded", nav.classList.contains("menu-open") ? "true" : "false");
+    } else {
+      // Desktop: IMMER sichtbar
+      nav.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+      navLinks.hidden = false;                 // <- wichtig
+      navLinks.style.removeProperty("display"); // <- wichtig (entfernt inline display:none)
+    }
+  }
+
+  // Initial + bei Resize
+  sync();
+  mq.addEventListener?.("change", sync);
+  window.addEventListener("resize", sync);
+
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!mq.matches) return;
+
+    nav.classList.toggle("menu-open");
+    sync();
+  });
+});
+
+
+</script>
 </body>
 
 </html>

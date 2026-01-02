@@ -1245,3 +1245,131 @@ header.nav-wrap .nav .burger{ display: none; }
     display: none !important; 
   }
 }
+
+header.nav-wrap .authors {
+  font-weight: 600; /* oder 700 für noch fetter */
+}
+
+header.nav-wrap .nav {
+  padding: 30px 32px; /* vorher ca. 14px → jetzt minimal höher */
+}
+
+header.nav-wrap .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header.nav-wrap .brand .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #c4b5fd,
+    #7c3aed 60%,
+    #5b21b6 100%
+  );
+  box-shadow:
+    0 0 8px rgba(139, 92, 246, 0.9),
+    0 0 16px rgba(139, 92, 246, 0.6);
+}
+
+body.home header.nav-wrap .brand {
+  font-size: 1.9rem;
+}
+
+
+
+
+
+/* Buttons: Text bleibt sichtbar + leuchtet beim Hover */
+.nav-links a,
+.card .btn,
+.grid .btn {
+  color: #ffffff;                 /* immer weiß */
+  text-shadow: none;
+}
+
+/* Hover-Effekt: Text-Glow */
+.nav-links a:hover,
+.card .btn:hover,
+.grid .btn:hover {
+  text-decoration: none !important;
+  color: #ffffff !important;      /* erzwingt weiß */
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.8),
+    0 0 14px rgba(179, 136, 255, 0.9),
+    0 0 28px rgba(139, 92, 246, 0.8);
+}
+
+
+/* ===== KONTAKTSEITE: ALLES EXAKT ZENTRIEREN ===== */
+
+/* äußere Kontaktkarte */
+.card.text-card .card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Überschriften & Texte */
+.card.text-card h1,
+.card.text-card h2,
+.card.text-card p {
+  text-align: center;
+}
+
+/* Schreib-uns-Pill */
+.card.text-card .pill {
+  margin: 0 auto 14px auto;
+  text-align: center;
+}
+
+/* Kontaktinfos (E-Mail, Telefon, Adresse) */
+.card.text-card .contact-info {
+  text-align: center !important;
+  padding-left: 0 !important;
+  margin: 12px auto 20px auto;
+}
+
+.card.text-card .contact-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card.text-card .contact-info li {
+  margin: 6px 0;
+}
+
+/* Formular */
+.card.text-card form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Labels */
+.card.text-card form label {
+  text-align: center;
+  width: 100%;
+  margin: 10px 0 6px 0;
+}
+
+/* Inputs & Textarea */
+.card.text-card form input,
+.card.text-card form textarea {
+  width: 80%;
+  max-width: 520px;
+  margin: 0 auto 14px auto;
+  display: block;
+}
+
+/* Senden-Button */
+.card.text-card form button {
+  margin: 20px auto 0 auto;
+  display: block;
+}

@@ -41,14 +41,15 @@
 
     <section class="card text-card">
       <div class="card-inner">
-        <span class="pill">Schreib uns</span>
+        <span class="pill">SCHREIBT UNS</span>
         <div class="contact-info" style="margin-top:14px;">
-          <p>So erreichst du uns am besten:</p>
+          <strong><p>Wir antworten allerspätestens in 1-2 Tagen</p></strong><br>
+          <p>So erreichst du uns am besten:</p> <br>
           <ul>
             <li>E-Mail: <a href="mailto:niklaskdamm@icloud.com">niklaskdamm@icloud.com</a></li>
-            <li>(Telefon)</li>
-            <li>Adresse: Sauerstraße 16, 24340 Eckernförde</li>
-          </ul>
+            <!--<li>(Telefon)</li>-->
+            <li>Adresse: JMS, Sauerstraße 16, 24340 Eckernförde</li>
+          </ul> <br>
           <p>Oder nutze einfach das folgende Formular:</p>
 
           <form action="#" method="post">
@@ -77,88 +78,68 @@
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("header.nav-wrap .nav");
+  const burger = nav?.querySelector(".burger");
+  const navLinks = nav?.querySelector(".nav-links");
+  if (!nav || !burger || !navLinks) return;
 
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".nav").forEach(nav => {
-      const burger = nav.querySelector(".burger");
-      const links = nav.querySelector(".nav-links");
-      if (!burger || !links) return;
+  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
-      // Startzustand: zu
-      burger.setAttribute("aria-expanded", "false");
-      links.hidden = true;
-      links.style.setProperty("display", "none", "important");
-
-      const setOpen = (open) => {
-        burger.setAttribute("aria-expanded", open ? "true" : "false");
-        links.hidden = !open;
-
-        // Brutaler Override gegen jedes CSS
-        links.style.setProperty("display", open ? "flex" : "none", "important");
-      };
-
-      burger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isOpen = burger.getAttribute("aria-expanded") === "true";
-        setOpen(!isOpen);
-      });
-
-      // Klick auf Link -> zu
-      links.querySelectorAll("a").forEach(a => {
-        a.addEventListener("click", () => setOpen(false));
-      });
-
-      // Klick außerhalb -> zu
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest(".nav")) setOpen(false);
-      });
-
-      // Resize -> zu
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) setOpen(false);
-      });
-    });
-  });
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const nav = document.querySelector("header.nav-wrap .nav");
-    const burger = nav?.querySelector(".burger");
-    const links = nav?.querySelector(".nav-links");
-    if (!nav || !burger || !links) return;
-
-    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
-
-    // Startzustand
+  function closeMenu() {
     nav.classList.remove("menu-open");
     burger.setAttribute("aria-expanded", "false");
+    if (isMobile()) navLinks.hidden = true;   // NUR mobile
+  }
 
-    burger.addEventListener("click", () => {
-      if (!isMobile()) return; // Desktop ignorieren
-      const open = nav.classList.toggle("menu-open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-    });
+  function openMenu() {
+    nav.classList.add("menu-open");
+    burger.setAttribute("aria-expanded", "true");
+    navLinks.hidden = false;
+  }
 
-    // Bei Klick auf Link: Menü auf Mobile schließen
-    links.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        if (!isMobile()) return;
-        nav.classList.remove("menu-open");
-        burger.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    // Beim Resize: Menü schließen (damit Desktop nicht "zu" bleibt)
-    window.addEventListener("resize", () => {
+  function sync() {
+    if (isMobile()) {
+      // Mobile: standard zu, außer menu-open ist gesetzt
+      if (nav.classList.contains("menu-open")) openMenu();
+      else closeMenu();
+    } else {
+      // Desktop: IMMER sichtbar, nie hidden, nie inline display
       nav.classList.remove("menu-open");
       burger.setAttribute("aria-expanded", "false");
+      navLinks.hidden = false;
+      navLinks.style.removeProperty("display"); // falls es mal gesetzt wurde
+    }
+  }
+
+  // Initial
+  sync();
+
+  // Toggle per Burger
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!isMobile()) return;
+    nav.classList.contains("menu-open") ? closeMenu() : openMenu();
+  });
+
+  // Klick außerhalb: NUR Mobile schließen
+  document.addEventListener("click", (e) => {
+    if (!isMobile()) return;
+    if (!nav.contains(e.target)) closeMenu();
+  });
+
+  // Link-Klick: NUR Mobile schließen
+  navLinks.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      if (isMobile()) closeMenu();
     });
   });
+
+  // Resize: neu synchronisieren
+  window.addEventListener("resize", sync);
+});
 </script>
+
 </body>
 
 </html>

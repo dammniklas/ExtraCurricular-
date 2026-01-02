@@ -68,16 +68,16 @@
         <span class="pill" id="intro">DIE IDEE</span>
         <div class="prose" style="margin-top:14px;">
           <p style="text-align: center;">
-            Ein Sammelsorium an außerschulischen Aktivitäten, Wettbewerben, Akademien, Gruppierungen, Veranstaltungen, Olympiaden,
-            Workshops und noch vielem mehr, für Schüler und Studenten, die sich für manche Themengebiete
-            besonders begeistern und die, die es noch nicht wissen
+            Ein Sammelsorium an außerschulischen Wettbewerben, Netzwerken,
+            Workshops, Olympiaden, Veranstaltungen und noch vielem mehr <br>Für Schüler aller Jahrgänge (und Studenten), die sich für gewisse Themengebiete
+            besonders begeistern und solche, die von ihrem versteckten Talent es noch nicht wissen
           </p>
           <br>
           <p>
             <strong>ExtraCurricular</strong> bündelt alles, was außerhalb des Stundenplans passiert
           </p>
           <br>
-          <p> Ein Initiativprojekt, um die Welt ein kleines Stück besser zu machen.
+          <p> Ein Initiativprojekt, gestartet um die Welt <strong>wieder</strong> kleines Stück besser zu machen
           </p>
         </div>
       </div>
@@ -91,90 +91,46 @@
     @ExtraCurricular 2025. Alle Rechte vorbehalten. <a href="impressum.html">Impressum</a> 
   </footer>
 
-  
 
 <script>
-
   
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".nav").forEach(nav => {
-      const burger = nav.querySelector(".burger");
-      const links = nav.querySelector(".nav-links");
-      if (!burger || !links) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("header.nav-wrap .nav");
+  const burger = nav?.querySelector(".burger");
+  const navLinks = nav?.querySelector(".nav-links");
+  if (!nav || !burger || !navLinks) return;
 
-      // Startzustand: zu
-      burger.setAttribute("aria-expanded", "false");
-      links.hidden = true;
-      links.style.setProperty("display", "none", "important");
+  const mq = window.matchMedia("(max-width: 768px)");
 
-      const setOpen = (open) => {
-        burger.setAttribute("aria-expanded", open ? "true" : "false");
-        links.hidden = !open;
-
-        // Brutaler Override gegen jedes CSS
-        links.style.setProperty("display", open ? "flex" : "none", "important");
-      };
-
-      burger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const isOpen = burger.getAttribute("aria-expanded") === "true";
-        setOpen(!isOpen);
-      });
-
-      // Klick auf Link -> zu
-      links.querySelectorAll("a").forEach(a => {
-        a.addEventListener("click", () => setOpen(false));
-      });
-
-      // Klick außerhalb -> zu
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest(".nav")) setOpen(false);
-      });
-
-      // Resize -> zu
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 768) setOpen(false);
-      });
-    });
-  });
-</script>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const nav = document.querySelector("header.nav-wrap .nav");
-    const burger = nav?.querySelector(".burger");
-    const links = nav?.querySelector(".nav-links");
-    if (!nav || !burger || !links) return;
-
-    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
-
-    // Startzustand
-    nav.classList.remove("menu-open");
-    burger.setAttribute("aria-expanded", "false");
-
-    burger.addEventListener("click", () => {
-      if (!isMobile()) return; // Desktop ignorieren
-      const open = nav.classList.toggle("menu-open");
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-
-    // Bei Klick auf Link: Menü auf Mobile schließen
-    links.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        if (!isMobile()) return;
-        nav.classList.remove("menu-open");
-        burger.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    // Beim Resize: Menü schließen (damit Desktop nicht "zu" bleibt)
-    window.addEventListener("resize", () => {
+  function sync() {
+    if (mq.matches) {
+      // Mobile: standard zu
+      navLinks.hidden = !nav.classList.contains("menu-open");
+      burger.setAttribute("aria-expanded", nav.classList.contains("menu-open") ? "true" : "false");
+    } else {
+      // Desktop: IMMER sichtbar
       nav.classList.remove("menu-open");
       burger.setAttribute("aria-expanded", "false");
-    });
+      navLinks.hidden = false;                 // <- wichtig
+      navLinks.style.removeProperty("display"); // <- wichtig (entfernt inline display:none)
+    }
+  }
+
+  // Initial + bei Resize
+  sync();
+  mq.addEventListener?.("change", sync);
+  window.addEventListener("resize", sync);
+
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!mq.matches) return;
+
+    nav.classList.toggle("menu-open");
+    sync();
   });
+});
+
+
 </script>
 
 

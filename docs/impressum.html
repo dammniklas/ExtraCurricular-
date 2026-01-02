@@ -105,44 +105,68 @@ Bei dem Angebot handelt es sich um ein nicht-kommerzielles, privates Projekt ohn
 
   
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const burger = document.querySelector(".burger");
-    const navLinks = document.querySelector(".nav-links");
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("header.nav-wrap .nav");
+  const burger = nav?.querySelector(".burger");
+  const navLinks = nav?.querySelector(".nav-links");
+  if (!nav || !burger || !navLinks) return;
 
-    if (!burger || !navLinks) return;
+  const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
 
-    // Öffnen/Schließen beim Klick auf Burger
-    burger.addEventListener("click", () => {
-      const isOpen = navLinks.classList.toggle("open");
-      burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
+  function closeMenu() {
+    nav.classList.remove("menu-open");
+    burger.setAttribute("aria-expanded", "false");
+    if (isMobile()) navLinks.hidden = true;   // NUR mobile
+  }
 
-    // Menü schließen wenn man auf einen Link klickt (mobile UX)
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
-      });
-    });
+  function openMenu() {
+    nav.classList.add("menu-open");
+    burger.setAttribute("aria-expanded", "true");
+    navLinks.hidden = false;
+  }
 
-    // Menü schließen wenn man außerhalb klickt
-    document.addEventListener("click", (e) => {
-      const clickedInsideNav = e.target.closest(".nav");
-      if (!clickedInsideNav) {
-        navLinks.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
-      }
-    });
+  function sync() {
+    if (isMobile()) {
+      // Mobile: standard zu, außer menu-open ist gesetzt
+      if (nav.classList.contains("menu-open")) openMenu();
+      else closeMenu();
+    } else {
+      // Desktop: IMMER sichtbar, nie hidden, nie inline display
+      nav.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+      navLinks.hidden = false;
+      navLinks.style.removeProperty("display"); // falls es mal gesetzt wurde
+    }
+  }
 
-    // Menü schließen wenn man wieder auf Desktop-Größe geht
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > 768) {
-        navLinks.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
-      }
+  // Initial
+  sync();
+
+  // Toggle per Burger
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!isMobile()) return;
+    nav.classList.contains("menu-open") ? closeMenu() : openMenu();
+  });
+
+  // Klick außerhalb: NUR Mobile schließen
+  document.addEventListener("click", (e) => {
+    if (!isMobile()) return;
+    if (!nav.contains(e.target)) closeMenu();
+  });
+
+  // Link-Klick: NUR Mobile schließen
+  navLinks.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", () => {
+      if (isMobile()) closeMenu();
     });
   });
+
+  // Resize: neu synchronisieren
+  window.addEventListener("resize", sync);
+});
 </script>
+
 
 
 </body>

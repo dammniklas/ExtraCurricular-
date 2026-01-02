@@ -93,7 +93,7 @@
           <div class="card-content">
             <p>Wettbewerb</p>
             <div class="actions">
-              <a class="btn" href="docs/mathematik.html">zur Website</a>
+              <a class="btn" href="https://www.mathe-im-advent.de/de/">zur Website</a>
             </div>
           </div>
         </article>
@@ -104,7 +104,7 @@
           <div class="card-content">
             <p>Wettbewerb</p>
             <div class="actions">
-              <a class="btn" href="https://www.mindsundergroundchallenge.com/top-choice-competitions/international-youth-math-challenge">zur Website</a>
+              <a class="btn" href="https://iymc.info/de/">zur Website</a>
             </div>
           </div>
         </article>
@@ -122,7 +122,46 @@
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+  <script>
+  
+document.addEventListener("DOMContentLoaded", () => {
+  const nav = document.querySelector("header.nav-wrap .nav");
+  const burger = nav?.querySelector(".burger");
+  const navLinks = nav?.querySelector(".nav-links");
+  if (!nav || !burger || !navLinks) return;
 
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  function sync() {
+    if (mq.matches) {
+      // Mobile: standard zu
+      navLinks.hidden = !nav.classList.contains("menu-open");
+      burger.setAttribute("aria-expanded", nav.classList.contains("menu-open") ? "true" : "false");
+    } else {
+      // Desktop: IMMER sichtbar
+      nav.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+      navLinks.hidden = false;                 // <- wichtig
+      navLinks.style.removeProperty("display"); // <- wichtig (entfernt inline display:none)
+    }
+  }
+
+  // Initial + bei Resize
+  sync();
+  mq.addEventListener?.("change", sync);
+  window.addEventListener("resize", sync);
+
+  burger.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!mq.matches) return;
+
+    nav.classList.toggle("menu-open");
+    sync();
+  });
+});
+
+
+</script>
 </body>
 
 </html>
