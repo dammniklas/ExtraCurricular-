@@ -39,21 +39,22 @@
 
     <div class="brand"><span class="dot"></span> ExtraCurricular</div>
 
-    <button class="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
-      <span></span><span></span><span></span>
-    </button>
+   <button class="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
+  <span></span><span></span><span></span>
+</button>
 
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Startseite</a>
-      <a href="uebersicht.html">Übersicht</a>
-      <a href="kontakt.html">Kontakt</a>
-    </div>
+<div class="nav-links">
+  <a href="index.html">Startseite</a>
+  <a href="uebersicht.html">Übersicht</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
   </nav>
 </header>
 
   <!-- Hero -->
   <main>
-
+    
     <section class="hero">
       <h1 class="title">ExtraCurricular</h1>
       <p class="subtitle">
@@ -91,17 +92,93 @@
   </footer>
 
   
-<script>
-  const burger = document.querySelector('.burger');
-  const navLinks = document.querySelector('.nav-links');
 
-  if (burger && navLinks) {
-    burger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+<script>
+
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".nav").forEach(nav => {
+      const burger = nav.querySelector(".burger");
+      const links = nav.querySelector(".nav-links");
+      if (!burger || !links) return;
+
+      // Startzustand: zu
+      burger.setAttribute("aria-expanded", "false");
+      links.hidden = true;
+      links.style.setProperty("display", "none", "important");
+
+      const setOpen = (open) => {
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+        links.hidden = !open;
+
+        // Brutaler Override gegen jedes CSS
+        links.style.setProperty("display", open ? "flex" : "none", "important");
+      };
+
+      burger.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = burger.getAttribute("aria-expanded") === "true";
+        setOpen(!isOpen);
+      });
+
+      // Klick auf Link -> zu
+      links.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => setOpen(false));
+      });
+
+      // Klick außerhalb -> zu
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".nav")) setOpen(false);
+      });
+
+      // Resize -> zu
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) setOpen(false);
+      });
     });
-  }
+  });
 </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const nav = document.querySelector("header.nav-wrap .nav");
+    const burger = nav?.querySelector(".burger");
+    const links = nav?.querySelector(".nav-links");
+    if (!nav || !burger || !links) return;
+
+    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
+
+    // Startzustand
+    nav.classList.remove("menu-open");
+    burger.setAttribute("aria-expanded", "false");
+
+    burger.addEventListener("click", () => {
+      if (!isMobile()) return; // Desktop ignorieren
+      const open = nav.classList.toggle("menu-open");
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+
+    // Bei Klick auf Link: Menü auf Mobile schließen
+    links.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        if (!isMobile()) return;
+        nav.classList.remove("menu-open");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Beim Resize: Menü schließen (damit Desktop nicht "zu" bleibt)
+    window.addEventListener("resize", () => {
+      nav.classList.remove("menu-open");
+      burger.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>
+
+
+
 
 </body>
 

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ExtraCurricular – Startseite</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="style.css">
+
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <!--
+  
+  
+  
+  <header class="nav-wrap" role="banner">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <p><strong>By Niklas K. Damm & Antonio L. Martinez</strong></p>
+      <div class="brand"><span class="dot"></span> ExtraCurricular</div>
+      <a class="active" href="#">Startseite</a>
+      <a href="uebersicht.html">Übersicht</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+  </header>
+  
+  
+  
+-->
+
+<header class="nav-wrap">
+  <nav class="nav">
+    <div class="authors">By Niklas K. Damm & Antonio L. Martinez</div>
+
+    <div class="brand"><span class="dot"></span> ExtraCurricular</div>
+
+    <button class="burger" aria-label="Menü öffnen" aria-expanded="false" type="button">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Startseite</a>
+      <a href="uebersicht.html">Übersicht</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </nav>
+</header>
+
+  <!-- Hero -->
+  <main>
+    
+    <section class="hero">
+      <h1 class="title">Impressum</h1>
+      <p class="subtitle">
+        
+      </p>
+    </section>
+
+    <!-- Textblock -->
+    <section class="card text-card" aria-labelledby="intro">
+      <div class="card-inner">
+        <span class="pill" id="intro">Gemeinnütziges Projekt</span>
+        <div class="prose" style="margin-top:14px;">
+          <p style="text-align: center;">
+            Angaben gemäß § 5 TMG und § 18 Abs. 2 MStV<br> <br>
+
+<strong>Anbieter dieser Website:</strong><br>
+Niklas K. Damm<br>
+Riesebyer Straße 12<br>
+24340 Eckernförde<br>
+Deutschland/Germany<br><br>
+
+<strong>Kontakt:</strong><br>
+E-Mail: niklaskdamm@icloud.com<br><br>
+
+<strong>Gemeinschaftliches Projekt mit:</strong><br>
+Antonio L. Martinez<br>
+Dorfstraße 32C<br>
+24366 Loose<br>
+Deutschland/Germany<br><br>
+
+<strong>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</strong><br>
+Niklas K. Damm<br>
+Anschrift wie oben<br><br>
+
+<strong>Hinweis:</strong><br>
+Bei dem Angebot handelt es sich um ein nicht-kommerzielles, privates Projekt ohne Gewinnerzielungsabsicht.<br>Es besteht keine Vereins- oder Organisationsstruktur im rechtlichen Sinne.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Platzhalter-Abschnitte, falls du später mehr Inhalte verlinken willst -->
+
+  <footer>
+    @ExtraCurricular 2025. Alle Rechte vorbehalten. <a href="impressum.html">Impressum</a> 
+  </footer>
+
+  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.querySelector(".burger");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (!burger || !navLinks) return;
+
+    // Öffnen/Schließen beim Klick auf Burger
+    burger.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+
+    // Menü schließen wenn man auf einen Link klickt (mobile UX)
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Menü schließen wenn man außerhalb klickt
+    document.addEventListener("click", (e) => {
+      const clickedInsideNav = e.target.closest(".nav");
+      if (!clickedInsideNav) {
+        navLinks.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    // Menü schließen wenn man wieder auf Desktop-Größe geht
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        navLinks.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+</script>
+
+
+</body>
+
+</html>

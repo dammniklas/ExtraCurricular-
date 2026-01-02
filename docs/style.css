@@ -1,5 +1,5 @@
  
-  /* === Grundlayou === */
+  /* === Grundlayout === */
 :root {
   --bg: #0a0711;
   --bg2: #120a1f;
@@ -40,37 +40,13 @@ html, body {
   border-bottom: 1px solid var(--border);
 }
 
-.nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: Orbitron, sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  font-size: 1.2rem;
-}
 
-.brand .dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, var(--purple-neon), var(--purple) 60%, #5b2bd4 100%);
-  box-shadow: var(--glow);
-}
+
 
 /* Navigation Links */
 .nav-links {
-  display: flex;
+  
   gap: 12px;
   align-items: center;
 }
@@ -193,8 +169,9 @@ html, body {
   box-shadow: var(--shadow);
   /*min-height: 320px; */
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  .grid .card { min-height: 320px; }
+  
 }
+.grid .card { min-height: 320px; }
 
 .card:hover {
   transform: translateY(-4px);
@@ -333,78 +310,7 @@ footer {
   }
 }
 
-@media (max-width: 640px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
 
-  /* --- NAV DESKTOP --- */
-.nav {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: nowrap;              /* nicht umbrechen */
-}
-
-.brand { display:flex; align-items:center; gap:10px; font-family: Orbitron, sans-serif; font-weight:700; }
-.brand { margin-right: auto; }    /* schiebt Links nach rechts */
-
-.nav-links {                      /* rechtsbündig, kompakt */
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: auto;
-}
-
-.nav-links a {
-  padding: 10px 16px;
-  width: auto;                    /* NICHT voller Block auf Desktop */
-}
-
-/* Burger nur mobil sichtbar */
-.burger { display: none; }
-
-/* --- NAV MOBIL --- */
-@media (max-width: 640px) {
-  .burger { display: flex; }
-  .nav { gap: 8px; }
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .nav-links.active { display: flex; }
-  .nav-links a { width: 100%; text-align: center; }
-}
-
-
-  .burger {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .nav-links.active {
-    display: flex;
-  }
-
-  .nav-links a {
-    width: 100%;
-    text-align: center;
-    background: rgba(139, 92, 246, 0.08);
-  }
-}
 /* ===== NAV-BUTTONS: runde, lila Chips (OVERRIDE) ===== */
 header.nav-wrap .nav a,
 header.nav-wrap .nav .nav-links a {
@@ -653,116 +559,32 @@ body > footer {
 /* ===== Navigationsleiste Feintuning ===== */
 
 /* 1. Zentriert den "ExtraCurricular"-Titel fix in der Mitte */
-nav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Titel bleibt mittig */
-  gap: 0; /* kein unnötiger Abstand */
-}
+
 
 /* Titel (ExtraCurricular) bleibt fix in der Mitte */
-nav .brand {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 700;
-  color: #e4dcff;
-  text-decoration: none;
-  font-size: 1.1rem;
-}
+
 
 /* 2. Buttons enger zusammenrücken */
-nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 10px; /* vorher vermutlich 25px oder mehr */
-  margin: 0;
-  padding: 0;
-}
+
 
 /* Optional: Buttons etwas kompakter */
-nav ul li a {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(139, 92, 246, 0.25);
-  color: #e4dcff;
-  font-weight: 600;
-  transition: all 0.25s ease;
-  text-decoration: none;
-}
 
-nav ul li a:hover {
-  background: rgba(167, 139, 250, 0.45);
-  box-shadow: 0 0 12px rgba(167, 139, 250, 0.7);
-  transform: translateY(-1px);
-}
+
 
 /* 3. Links platzierter Autor-Text bleibt unverändert */
-nav .authors {
-  position: absolute;
-  left: 20px;
-  font-size: 0.9rem;
-  color: #d1c7ff;
-}
+
 
 
 /* ===== Navigation richtig ausrichten ===== */
-nav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Autoren links, Buttons rechts */
-  padding: 10px 40px;
-}
+
 
 /* Autorenlink links */
-nav .authors {
-  position: relative;
-  left: 0;
-  font-size: 0.9rem;
-  color: #d1c7ff;
-}
+
 
 /* Titel fix in der Mitte */
-nav .brand {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: 700;
-  color: #e4dcff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  pointer-events: none; /* bleibt fix, kein Klick */
-}
+
 
 /* Navigation rechts */
-nav ul {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Buttons näher zusammen */
-  margin: 0;
-  padding: 0;
-}
-
-/* Buttons selbst */
-nav ul li a {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(139, 92, 246, 0.25);
-  color: #e4dcff;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.25s ease;
-}
-
-nav ul li a:hover {
-  background: rgba(167, 139, 250, 0.45);
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
-  transform: translateY(-1px);
-}
 
 
 /* ===== NAV: Titel fix in der Mitte, Buttons ganz rechts, kleiner Abstand ===== */
@@ -847,6 +669,11 @@ a:hover {
   .card.text-card {
     margin-bottom: 80px !important;
   }
+}
+header.nav-wrap .nav .authors {
+  margin-right: auto;
+  font-size: 0.9rem;
+  color: #d1c7ff;
 }
 
 /* ===== Kontaktkarte: perfekte Zentrierung & Balance ===== */
@@ -1098,3 +925,323 @@ header.nav-wrap .burger { display: none; } /* Desktop: aus */
 
 
 
+/* ===============================
+   NAVIGATION + BURGER (FINAL)
+   =============================== */
+
+/* ===== Grundlayout ===== */
+header.nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header.nav-wrap .nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+/* ===== Titel mittig fixiert ===== */
+header.nav-wrap .nav .brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* ===== Nav-Links (Desktop sichtbar) ===== */
+header.nav-wrap .nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+/* ===== Burger (Desktop aus) ===== */
+header.nav-wrap .nav .burger {
+  display: none;
+}
+
+/* ===============================
+   BURGER ICON + X ANIMATION
+   =============================== */
+header.nav-wrap .burger {
+  position: relative;
+  width: 34px;
+  height: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+header.nav-wrap .burger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--text);
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+header.nav-wrap .burger span:nth-child(1) { top: 0; }
+header.nav-wrap .burger span:nth-child(2) { top: 11px; }
+header.nav-wrap .burger span:nth-child(3) { bottom: 0; }
+
+/* X-Zustand */
+header.nav-wrap .burger[aria-expanded="true"] span:nth-child(1) {
+  top: 11px;
+  transform: rotate(45deg);
+}
+header.nav-wrap .burger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+header.nav-wrap .burger[aria-expanded="true"] span:nth-child(3) {
+  bottom: 11px;
+  transform: rotate(-45deg);
+}
+
+/* ===============================
+   MOBILE (<= 768px)
+   =============================== */
+@media (max-width: 768px) {
+
+  /* Nav stapeln */
+  header.nav-wrap .nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Titel normal (nicht absolut) */
+  header.nav-wrap .nav .brand {
+    position: static;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Burger EIN */
+  header.nav-wrap .nav .burger {
+    display: flex;
+  }
+
+  /* Links standardmäßig AUS */
+  header.nav-wrap .nav .nav-links {
+    display: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  /* Wenn offen */
+  header.nav-wrap .nav.menu-open .nav-links {
+    display: flex;
+  }
+}
+
+/* ===============================
+   DESKTOP OVERRIDE (SICHER)
+   =============================== */
+@media (min-width: 769px) {
+  header.nav-wrap .nav .nav-links {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  header.nav-wrap .nav .burger {
+    display: none !important;
+  }
+}
+
+
+/* ===== NAV LINKS: Desktop immer sichtbar ===== */
+header.nav-wrap .nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+}
+
+header.nav-wrap .nav .brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+header.nav-wrap .nav .nav-links {
+  display: flex !important;     /* Desktop sichtbar */
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+header.nav-wrap .nav .burger {
+  display: none !important;     /* Desktop kein Burger */
+}
+
+/* ===== MOBILE: Burger sichtbar, Links einklappbar ===== */
+@media (max-width: 768px) {
+  header.nav-wrap .nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  header.nav-wrap .nav .brand {
+    position: static;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  header.nav-wrap .nav .burger {
+    display: block !important;
+  }
+
+  header.nav-wrap .nav .nav-links {
+    display: none !important;   /* standard: zu */
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  header.nav-wrap .nav.menu-open .nav-links {
+    display: flex !important;   /* offen */
+  }
+}
+
+/* ===== DESKTOP NUKLEAR-FIX: Nav-Buttons oben rechts erzwingen ===== */
+@media (min-width: 769px) {
+  header.nav-wrap .nav {
+    position: relative !important;
+  }
+
+  header.nav-wrap .nav .nav-links {
+    display: flex !important;
+    gap: 18px !important;
+
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: auto !important;
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+  }
+
+  /* Burger auf Desktop aus */
+  header.nav-wrap .nav .burger {
+    display: none !important;
+  }
+
+  /* Brand bleibt mittig */
+  header.nav-wrap .nav .brand {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    top: 50% !important;
+    pointer-events: none;
+  }
+}
+@media (min-width: 769px){
+  header.nav-wrap .nav .nav-links a { color: #fff !important; }
+}
+
+
+/* ===== NAV (einziges System) ===== */
+header.nav-wrap { position: sticky; top: 0; z-index: 100; }
+
+header.nav-wrap .nav{
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+}
+
+header.nav-wrap .nav .authors{ margin-right: auto; }
+
+header.nav-wrap .nav .brand{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+header.nav-wrap .nav .nav-links{
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+  align-items: center;
+}
+
+header.nav-wrap .nav .burger{ display: none; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px){
+  header.nav-wrap .nav{
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  header.nav-wrap .nav .brand{
+    position: static;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  header.nav-wrap .nav .burger{ display: block; }
+
+  header.nav-wrap .nav .nav-links{
+    display: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  header.nav-wrap .nav.menu-open .nav-links{
+    display: flex;
+  }
+}
+
+/* Desktop-Sicherheit */
+@media (min-width: 769px){
+  header.nav-wrap .nav .nav-links{ display:flex !important; }
+  header.nav-wrap .nav .burger{ display:none !important; }
+}
+
+
+/* ===== EMERGENCY: Desktop Buttons erzwingen ===== */
+@media (min-width: 769px) {
+  header.nav-wrap .nav .nav-links {
+    display: flex !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    gap: 18px !important;
+    z-index: 99999 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  header.nav-wrap .nav .burger { 
+    display: none !important; 
+  }
+}
